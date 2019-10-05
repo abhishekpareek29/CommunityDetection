@@ -115,7 +115,7 @@ def main(alpha):
 	for col in attributes.keys():
 		g.vs[col] = attributes[col]
 
-	# Pre-Computing Similarity Matrix
+	# Pre-Computing Similarity Matrix.
 	global simMatrix
 	global simMatrix2
 	simMatrix = np.zeros((V,V))
@@ -126,17 +126,17 @@ def main(alpha):
 	# Copy.
 	simMatrix2 = np.array(simMatrix)
 
-	# Run Algorithm
+	# Run Algorithm.
 	V = g.vcount()
 	C = phase1(g, alpha, list(range(V)))
 	print('Number of Communities after Phase 1')
 	print(len(set(C)))
 	C = sequential_clusters(C)
 
-	# Modularity of phase 1 clustering
+	# Modularity of phase 1 clustering.
 	mod1 = g.modularity(C, weights='weight') + total_attr_sim(C, g)
 
-	# Phase 2
+	# Phase 2.
 	phase2(g, C)
 
 	# Run phase 1 again.
@@ -144,7 +144,7 @@ def main(alpha):
 	C2 = phase1(g, alpha, list(range(V)))
 	C2new = sequential_clusters(C2)
 	clustersPhase2 = list(Clustering(C2new))
-	#Composite modularity of contracted clustering
+	#Composite modularity of contracted clustering.
 	mod2 = g.modularity(C, weights='weight') + total_attr_sim(C, g)
 
 	finalC = []
